@@ -1,0 +1,45 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: pinot-controller-headless
+  namespace: data-platform
+  labels:
+    app: pinot-controller
+spec:
+  clusterIP: None
+  ports:
+  - port: 9000
+    name: pinot-controller-api
+  selector:
+    app: pinot-controller
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: pinot-broker-headless
+  namespace: data-platform
+  labels:
+    app: pinot-broker
+spec:
+  ports:
+  - port: 8099
+    name: pinot-broker-api
+  clusterIP: None
+  selector:
+    app: pinot-broker
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: pinot-server-headless
+  namespace: data-platform
+  labels:
+    app: pinot-server
+spec:
+  ports:
+  - port: 8098
+    name: pinot-server-api
+  clusterIP: None
+  selector:
+    app: pinot-server
+

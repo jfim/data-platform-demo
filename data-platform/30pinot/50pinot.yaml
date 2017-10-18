@@ -1,0 +1,78 @@
+apiVersion: apps/v1beta1
+kind: StatefulSet
+metadata:
+  name: pinot-controller
+  namespace: data-platform
+spec:
+  serviceName: pinot-controller-headless
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: pinot-controller
+    spec:
+      containers:
+      - name: pinot-controller
+        image: jfim/pinot-controller:latest
+        ports:
+        - containerPort: 9000
+        env:
+        - name : ZK_ADDRESS
+          value: "zk-0.zk-headless:2181"
+        volumeMounts:
+        - name: pinot-datadir
+          mountPath: /data/pinot-controller-datadir
+      volumes:
+        - name: pinot-datadir
+          persistentVolumeClaim:
+            claimName: pinot-datadir-pvc
+---
+apiVersion: apps/v1beta1
+kind: StatefulSet
+metadata:
+  name: pinot-broker
+  namespace: data-platform
+spec:
+  serviceName: pinot-broker-headless
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: pinot-broker
+    spec:
+      containers:
+      - name: pinot-broker
+        image: jfim/pinot-broker:latest
+        ports:
+        - containerPort: 9000
+        env:
+        - name : ZK_ADDRESS
+          value: "zk-0.zk-headless:2181"
+---
+apiVersion: apps/v1beta1
+kind: StatefulSet
+metadata:
+  name: pinot-server
+  namespace: data-platform
+spec:
+  serviceName: pinot-server-headless
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: pinot-server
+    spec:
+      containers:
+      - name: pinot-server
+        image: jfim/pinot-server:latest
+        ports:
+        - containerPort: 9000
+        env:
+        - name : ZK_ADDRESS
+          value: "zk-0.zk-headless:2181"
+        volumeMounts:
+        - mountPath: /data/pinot-server
+          name: pinot-server-storage
+      volumes:
+      - name: pinot-server-storage
+        emptyDir: {}

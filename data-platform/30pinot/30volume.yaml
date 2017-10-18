@@ -1,0 +1,13 @@
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: pinot-datadir-pvc
+  namespace: data-platform
+  annotations:
+    volume.alpha.kubernetes.io/storage-class: anything
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 256Mi
