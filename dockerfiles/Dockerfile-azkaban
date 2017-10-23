@@ -1,0 +1,27 @@
+###
+# Instructions - run these commands from the directory where Dockerfile-azkaban is located
+#
+# Build command:
+# (Note - make sure at least 4G are available to your docker VM if not on Linux, Mac default is 2G)
+# (Also this takes 10-20 minutes. Would LOVE for a docker expert to advise how to improve speed :) )
+# docker build -m 4G -f Dockerfile-azkaban .
+#
+# Run command:
+# docker run -d -p 8081:8081 <YOUR BUILT CONTAINER HASH>
+#
+# Then you can view the solo-server at localhost:8081
+#
+
+FROM openjdk:8
+
+# download Azkaban from OS repo and checkout version 3.37.0
+RUN git clone https://github.com/azkaban/azkaban.git && cd azkaban && git reset --hard ce1e17b && echo "lol"
+
+# build and install Azkaban
+RUN cd azkaban && ./gradlew clean build installDist
+
+EXPOSE 8081/tcp
+
+# TODO: reallocf make this so it isn't horribly hacky (i.e. doesn't involve sleeping forever)
+# start solo-server and sleep for 10 hours so container stays alive
+CMD cd azkaban/azkaban-solo-server/build/install/azkaban-solo-server/ && bin/azkaban-solo-start.sh && echo "Solo server built - now sleeping forever so docker container stays alive" && sleep infinity
