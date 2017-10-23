@@ -15,7 +15,7 @@
 FROM openjdk:8
 
 # download Azkaban from OS repo and checkout version 3.37.0
-RUN git clone https://github.com/azkaban/azkaban.git && cd azkaban && git reset --hard ce1e17b && echo "lol"
+RUN git clone https://github.com/azkaban/azkaban.git && cd azkaban && git reset --hard ce1e17b
 
 # build and install Azkaban
 RUN cd azkaban && ./gradlew clean build installDist
