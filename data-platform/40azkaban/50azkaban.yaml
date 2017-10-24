@@ -1,0 +1,21 @@
+apiVersion: apps/v1beta1
+kind: StatefulSet
+metadata:
+  name: azkaban
+  namespace: data-platform
+  labels:
+    app: azkaban
+spec:
+  serviceName: azkaban-headless
+  replicas: 1
+  template:
+    metadata:
+      namespace: data-platform
+      labels:
+        app: azkaban
+    spec:
+      containers:
+      - name: azkaban
+        image: reallocf/azkaban-solo-server:3.37.0
+        ports:
+        - containerPort: 8081
