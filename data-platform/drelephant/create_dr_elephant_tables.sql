@@ -1,8 +1,3 @@
--- MySQL dump 10.13  Distrib 5.1.73, for redhat-linux-gnu (x86_64)
---
--- Host: ltx1-app10753.prod.linkedin.com    Database: drelephant_holdem
--- ------------------------------------------------------
--- Server version	5.6.16-log
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
