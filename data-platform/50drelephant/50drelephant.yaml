@@ -1,0 +1,21 @@
+apiVersion: apps/v1beta1
+kind: StatefulSet
+metadata:
+  name: drelephant
+  namespace: data-platform
+  labels:
+    app: drelephant
+spec:
+  serviceName: drelephant-headless
+  replicas: 1
+  template:
+    metadata:
+      namespace: data-platform
+      labels:
+        app: drelephant
+    spec:
+      containers:
+      - name: drelephant
+        image: jfim/drelephant-demo:latest
+        ports:
+        - containerPort: 8080
