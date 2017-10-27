@@ -55,15 +55,6 @@ RUN git clone https://github.com/jakhani/drelephant-demo.git drelephant-demo\
  && ln -s  /usr/dr-elephant-$ELEPHANT_VERSION /usr/dr-elephant \
  && rm -Rf /drelephant-demo
 
-## Linked MySql container env vars are injected
-# RUN cd /usr/dr-elephant \
-# && sed -i -e "s/port=.*/port=\${http_port:-8080}/g"                              ./app-conf/elephant.conf \
-# && sed -i -e "s/db_url=.*/db_url\=\${MYSQL_PORT_3306_TCP_ADDR:-dr-elephant-mysql}/g"     ./app-conf/elephant.conf \
-# && sed -i -e "s/db_name=.*/db_name=\${MYSQL_ENV_MYSQL_DATABASE:-drelephant}/g"   ./app-conf/elephant.conf \
-# && sed -i -e "s/db_user=.*/db_user=\${MYSQL_ENV_MYSQL_USER:-root}/g"             ./app-conf/elephant.conf \
-# && sed -i -e "s/db_password=.*/db_password=\${MYSQL_ENV_MYSQL_PASSWORD:-drelephant}/g"   ./app-conf/elephant.conf \
-# && sed -i -e 's@jvm_props=.*@jvm_args="-Devolutionplugin=disabled -DapplyEvolutions.default=false -J-XX:MaxPermSize=2g -J-XX:PermSize=1g -J-Xmx16g"@g' ./app-conf/elephant.conf
-
 ## RUN ##
 
 #EXPOSE 8080

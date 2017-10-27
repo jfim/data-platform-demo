@@ -9,5 +9,4 @@ docker-compose start
 Then when it's up, you can connect to http://localhost:8080/new# (or use the hostname of the machine where you are running docker from)
 Once your service is running, you can load data into mysql and see the same in UI
 Run "docker ps" command and copy container id for 50drelephant_dr-elephant-mysql_1
-Run "docker exec -i {container_id} mysql -uroot -pdrelephant -Ddrelephant < data/setup.sql" to load data
 Refresh UI and you will see all the applications
