@@ -1,0 +1,46 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: wherehows-elasticsearch-headless
+  namespace: data-platform
+  labels:
+    app: wherehows-elasticsearch
+spec:
+  clusterIP: None
+  ports:
+  - port: 9200
+    name: elasticsearch-rest-api
+  - port: 9300
+    name: elasticsearch-api
+  selector:
+    app: wherehows-elasticsearch
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: wherehows-backend-headless
+  namespace: data-platform
+  labels:
+    app: wherehows-backend
+spec:
+  ports:
+  - port: 9000
+    name: wherehows-backend-api
+  clusterIP: None
+  selector:
+    app: wherehows-backend
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: wherehows-frontend-headless
+  namespace: data-platform
+  labels:
+    app: wherehows-frontend
+spec:
+  ports:
+  - port: 9000
+    name: wherehows-frontend-api
+  clusterIP: None
+  selector:
+    app: wherehows-frontend
