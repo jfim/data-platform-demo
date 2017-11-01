@@ -19,6 +19,8 @@ spec:
         env:
         - name : ZK_ADDRESS
           value: "zk-0.zk-headless:2181"
+        - name : JAVA_OPTS
+          value: "-Xms256M -Xmx256M -Dlog4j.configuration=conf/pinot-controller-log4j.properties"
         volumeMounts:
         - name: pinot-datadir
           mountPath: /data/pinot-controller-datadir
@@ -48,6 +50,8 @@ spec:
         env:
         - name : ZK_ADDRESS
           value: "zk-0.zk-headless:2181"
+        - name : JAVA_OPTS
+          value: "-Xms256M -Xmx256M -Dlog4j.configuration=conf/pinot-broker-log4j.properties"
 ---
 apiVersion: apps/v1beta1
 kind: StatefulSet
@@ -56,7 +60,7 @@ metadata:
   namespace: data-platform
 spec:
   serviceName: pinot-server-headless
-  replicas: 2
+  replicas: 1
   template:
     metadata:
       labels:
@@ -70,6 +74,8 @@ spec:
         env:
         - name : ZK_ADDRESS
           value: "zk-0.zk-headless:2181"
+        - name : JAVA_OPTS
+          value: "-Xms256M -Xmx256M -Dlog4j.configuration=conf/pinot-server-log4j.properties"
         volumeMounts:
         - mountPath: /data/pinot-server
           name: pinot-server-storage

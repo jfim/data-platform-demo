@@ -31,6 +31,8 @@ spec:
         env:
         - name: KAFKA_LOG4J_OPTS
           value: -Dlog4j.configuration=file:/etc/kafka/log4j.properties
+        - name: KAFKA_HEAP_OPTS
+          value: "-Xmx256M -Xms256M -server"
         ports:
         - containerPort: 9092
         command:
