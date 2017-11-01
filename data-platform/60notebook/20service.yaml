@@ -1,0 +1,29 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: sparkmagic-livy-headless
+  namespace: data-platform
+  labels:
+    app: sparkmagic-livy
+spec:
+  clusterIP: None
+  ports:
+  - port: 8998
+    name: sparkmagic-livy-ui
+  selector:
+    app: sparkmagic-livy
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: sparkmagic-headless
+  namespace: data-platform
+  labels:
+    app: sparkmagic
+spec:
+  clusterIP: None
+  ports:
+  - port: 8888
+    name: sparkmagic-ui
+  selector:
+    app: sparkmagic

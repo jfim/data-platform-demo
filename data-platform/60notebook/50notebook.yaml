@@ -1,0 +1,43 @@
+apiVersion: apps/v1beta1
+kind: StatefulSet
+metadata:
+  name: sparkmagic-livy
+  namespace: data-platform
+  labels:
+    app: sparkmagic-livy
+spec:
+  serviceName: sparkmagic-livy-headless
+  replicas: 1
+  template:
+    metadata:
+      namespace: data-platform
+      labels:
+        app: sparkmagic-livy
+    spec:
+      containers:
+      - name: sparkmagic-livy
+        image: jfim/livy-spark:latest
+        ports:
+        - containerPort: 8998
+---
+apiVersion: apps/v1beta1
+kind: StatefulSet
+metadata:
+  name: sparkmagic
+  namespace: data-platform
+  labels:
+    app: sparkmagic
+spec:
+  serviceName: sparkmagic-headless
+  replicas: 1
+  template:
+    metadata:
+      namespace: data-platform
+      labels:
+        app: sparkmagic
+    spec:
+      containers:
+      - name: sparkmagic
+        image: jfim/jupyter:latest
+        ports:
+        - containerPort: 8888
