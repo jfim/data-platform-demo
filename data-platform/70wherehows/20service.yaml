@@ -18,21 +18,6 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: wherehows-backend-headless
-  namespace: data-platform
-  labels:
-    app: wherehows-backend
-spec:
-  ports:
-  - port: 9000
-    name: wherehows-backend-api
-  clusterIP: None
-  selector:
-    app: wherehows-backend
----
-apiVersion: v1
-kind: Service
-metadata:
   name: wherehows-frontend-headless
   namespace: data-platform
   labels:

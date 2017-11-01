@@ -13,41 +13,10 @@ spec:
     spec:
       containers:
       - name: wherehows-elasticsearch
-        image: jfim/wherehows-elasticsearch:latest
+        image: linkedin/wherehows-elasticsearch:latest
         ports:
         - containerPort: 9200
         - containerPort: 9300
----
-apiVersion: apps/v1beta1
-kind: StatefulSet
-metadata:
-  name: wherehows-backend
-  namespace: data-platform
-spec:
-  serviceName: wherehows-backend-headless
-  replicas: 1
-  template:
-    metadata:
-      labels:
-        app: wherehows-backend
-    spec:
-      containers:
-      - name: wherehows-backend
-        image: jfim/wherehows-backend:latest
-        ports:
-        - containerPort: 9000
-        command: ["dockerize", "-wait", "tcp://mysql.data-platform:3306",
-        "-timeout", "120s", "bin/playBinary"]
-        env:
-# TODO Replace these environment variables
-        - name : WHZ_SECRET
-          value: "TODO"
-        - name : WHZ_DB_USERNAME
-          value: "wherehows"
-        - name : WHZ_DB_PASSWORD
-          value: "wherehows"
-        - name : WHZ_DB_URL
-          value: "jdbc:mysql://mysql.data-platform:3306/TODO"
 ---
 apiVersion: apps/v1beta1
 kind: StatefulSet
@@ -56,7 +25,7 @@ metadata:
   namespace: data-platform
 spec:
   serviceName: wherehows-frontend-headless
-  replicas: 2
+  replicas: 1
   template:
     metadata:
       labels:
@@ -64,11 +33,11 @@ spec:
     spec:
       containers:
       - name: wherehows-frontend
-        image: jfim/wherehows-frontend:latest
+        image: linkedin/wherehows-frontend:latest
         ports:
         - containerPort: 9000
         command: ["dockerize", "-wait", "tcp://mysql.data-platform:3306",
-        "-wait", "http://wherehows-elasticsearch.data-platform:9200",
+        "-wait", "http://wherehows-elasticsearch-headless.data-platform:9200",
         "-timeout", "120s", "bin/playBinary"]
         env:
 # TODO Replace these environment variables
@@ -83,11 +52,11 @@ spec:
         - name : WHZ_SEARCH_ENGINE
           value: "elasticsearch"
         - name : WHZ_ES_DATASET_URL
-          value: "http://wherehows-elasticsearch.data-platform:9200/wherehows/dataset/_search"
+          value: "http://wherehows-elasticsearch-headless.data-platform:9200/wherehows/dataset/_search"
         - name : WHZ_ES_METRIC_URL
-          value: "http://wherehows-elasticsearch.data-platform:9200/wherehows/metric/_search"
+          value: "http://wherehows-elasticsearch-headless.data-platform:9200/wherehows/metric/_search"
         - name : WHZ_ES_FLOW_URL
-          value: "http://wherehows-elasticsearch.data-platform:9200/wherehows/flow_jobs/_search"
+          value: "http://wherehows-elasticsearch-headless.data-platform:9200/wherehows/flow_jobs/_search"
         - name : WHZ_LDAP_URL
           value: "TODO"
         - name : WHZ_LDAP_PRINCIPAL_DOMAIN
