@@ -17,8 +17,5 @@ spec:
       containers:
       - name: azkaban
         image: reallocf/azkaban-solo-server:3.37.0_v5
-        env:
-        - name: HADOOP_HOME
-          value: /hadoop
         ports:
         - containerPort: 8081
