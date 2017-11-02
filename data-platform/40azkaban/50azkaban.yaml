@@ -16,6 +16,6 @@ spec:
     spec:
       containers:
       - name: azkaban
-        image: reallocf/azkaban-solo-server:3.37.0
+        image: reallocf/azkaban-solo-server:3.37.0_v5
         ports:
         - containerPort: 8081
