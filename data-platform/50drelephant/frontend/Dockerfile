@@ -57,12 +57,11 @@ RUN git clone https://github.com/jakhani/drelephant-demo.git drelephant-demo\
 
 ## RUN ##
 
-#EXPOSE 8080
-
-#VOLUME $ELEPHANT_CONF_DIR $HADOOP_CONF_DIR /usr/dr-elephant/logs
-
-#CMD ["/usr/dr-elephant/bin/start.sh /usr/dr-elephant/app-conf/"]
-
+COPY ./hadoop-conf/core-site.xml $HADOOP_CONF_DIR/
+COPY ./hadoop-conf/mapred-site.xml $HADOOP_CONF_DIR/
+COPY ./hadoop-conf/yarn-site.xml $HADOOP_CONF_DIR/
+COPY elephant.conf /usr/dr-elephant/app-conf/
+COPY setup.sql /usr/dr-elephant/
 COPY entrypoint.sh /
 COPY start.sh /
 

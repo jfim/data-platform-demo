@@ -1,6 +1,6 @@
 <configuration>
         <property>
                 <name>fs.default.name</name>
-                <value>hdfs://NAMENODE_HOSTNAME</value>
+                <value>hdfs://hdfs-nn.yarn-cluster:9000</value>
         </property>
 </configuration>

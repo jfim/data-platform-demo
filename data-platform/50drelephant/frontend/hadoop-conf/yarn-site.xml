@@ -9,7 +9,7 @@
 </property>
 <property>
  <name>yarn.resourcemanager.hostname</name>
- <value>RESOURCE_MANAGER_HOSTNAME</value>
+ <value>yarn-rm.yarn-cluster:8088</value>
 </property>
 
 <property>

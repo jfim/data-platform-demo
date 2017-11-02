@@ -16,6 +16,6 @@ spec:
     spec:
       containers:
       - name: drelephant
-        image: jfim/drelephant-demo:latest
+        image: januakhani/drelephant-demo:latest
         ports:
         - containerPort: 8080
