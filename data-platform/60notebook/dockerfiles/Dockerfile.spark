@@ -31,6 +31,10 @@ RUN mkdir -p /apps/build && \
   mkdir -p $LIVY_APP_PATH/logs
 
 COPY pinot-api-0.016.jar /apps/livy-server-0.3.0/jars/pinot-api-0.016.jar
+COPY core-site.xml $HADOOP_CONF_DIR/core-site.xml
+COPY mapred-site.xml $HADOOP_CONF_DIR/mapred-site.xml
+COPY yarn-site.xml $HADOOP_CONF_DIR/yarn-site.xml
 EXPOSE 8998
 
+COPY pinot-api-0.016.jar /apps/livy-server-0.3.0/jars/
 CMD ["/apps/livy-server-0.3.0/bin/livy-server"]
