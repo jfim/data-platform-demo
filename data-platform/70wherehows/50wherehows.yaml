@@ -48,7 +48,7 @@ spec:
         - name : WHZ_DB_PASSWORD
           value: "wherehows"
         - name : WHZ_DB_URL
-          value: "jdbc:mysql://mysql.data-platform:3306/TODO"
+          value: "jdbc:mysql://mysql.data-platform:3306/wherehows"
         - name : WHZ_SEARCH_ENGINE
           value: "elasticsearch"
         - name : WHZ_ES_DATASET_URL
