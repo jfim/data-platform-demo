@@ -1,3 +1,5 @@
+#!/bin/sh
+killall kubectl
 kubectl port-forward -n data-platform sparkmagic-0 10000:8888 &
 kubectl port-forward -n data-platform wherehows-frontend-0 10001:9000 &
 kubectl port-forward -n data-platform wherehows-elasticsearch-0 10002:9200 &
