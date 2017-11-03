@@ -33,5 +33,4 @@ RUN mkdir -p /apps/build && \
 COPY pinot-api-0.016.jar /apps/livy-server-0.3.0/jars/pinot-api-0.016.jar
 EXPOSE 8998
 
-COPY pinot-api-0.016.jar /apps/livy-server-0.3.0/jars/
 CMD ["/apps/livy-server-0.3.0/bin/livy-server"]
