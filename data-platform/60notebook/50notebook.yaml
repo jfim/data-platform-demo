@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: sparkmagic-livy
-        image: jfim/livy-spark:latest
+        image: januakhani/livy-spark:latest
         ports:
         - containerPort: 8998
 ---
@@ -38,6 +38,6 @@ spec:
     spec:
       containers:
       - name: sparkmagic
-        image: jfim/jupyter:latest
+        image: januakhani/jupyter:latest
         ports:
         - containerPort: 8888
